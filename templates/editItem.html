@@ -1,0 +1,81 @@
+<html>
+
+<head>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+    </head>
+
+<body><h1> Edit Item </h1>
+
+<form action="#" method = 'post'>
+
+
+    <p>Name:</p>
+        <input type ='text' size='30' name='name' placeholder = '{{item.name }}'>
+    <p>Description:</p>
+        <input type ='text' size='30' name='description' placeholder = '{{item.description}}'>
+    <p>Sport:<p>
+
+    {% if item.sport == 'Futbol' %}
+        <dd><input type ='radio' name='sport' value='Futbol' checked>Futbol</dd>
+    {%else%}
+    <dd><input type ='radio' name='sport' value='Futbol'>Futbol</dd>
+    {% endif %}
+
+       {% if item.sport == 'Basketball' %}
+        <dd><input type ='radio' name='sport' value='Basketball' checked>Basketball</dd>
+    {%else%}
+    <dd><input type ='radio' name='sport' value='Basketball'>Basketball</dd>
+    {% endif %}
+
+    {% if item.sport == 'Baseball' %}
+        <dd><input type ='radio' name='sport' value='Baseball' checked>Baseball</dd>
+    {%else%}
+    <dd><input type ='radio' name='sport' value='Baseball'>Baseball</dd>
+    {% endif %}
+
+
+    {% if item.sport == 'Frisbee' %}
+        <dd><input type ='radio' name='sport' value='Frisbee' checked>Frisbee</dd>
+    {%else%}
+    <dd><input type ='radio' name='sport' value='Frisbee'>Frisbee</dd>
+    {% endif %}
+
+    {% if item.sport == 'Snowboarding' %}
+        <dd><input type ='radio' name='sport' value='Snowboarding' checked>Snowboarding</dd>
+    {%else%}
+    <dd><input type ='radio' name='sport' value='Snowboarding'>Snowboarding</dd>
+    {% endif %}
+
+    {% if item.sport == 'Rock Climbing' %}
+        <dd><input type ='radio' name='sport' value='Rock Climbing' checked>Rock Climbing</dd>
+    {%else%}
+    <dd><input type ='radio' name='sport' value='Rock Climbing'>Rock Climbing</dd>
+    {% endif %}
+
+    {% if item.sport == 'Foosball' %}
+        <dd><input type ='radio' name='sport' value='Foosball' checked>Foosball</dd>
+    {%else%}
+    <dd><input type ='radio' name='sport' value='Foosball'>Foosball</dd>
+    {% endif %}
+
+    {% if item.sport == 'Skating' %}
+        <dd><input type ='radio' name='sport' value='Skating' checked>Skating</dd>
+    {%else%}
+    <dd><input type ='radio' name='sport' value='Skating'>Skating</dd>
+    {% endif %}
+
+    {% if item.sport == 'Hockey' %}
+        <dd><input type ='radio' name='sport' value='Hockey' checked>Hockey</dd>
+    {%else%}
+    <dd><input type ='radio' name='sport' value='Hockey'>Hockey</dd>
+    {% endif %}
+
+<input type='submit' value='Edit'>
+
+
+<a href = '#'> Cancel </a>
+
+
+</form>
+</body>
+</html>

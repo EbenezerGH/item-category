@@ -1,0 +1,6 @@
+Scrolling to position and setting offset
+throws off the tab layout
+
+offsetting metacontainer offsets the other recyclerview
+
+Find a way to scroll tab view to inital position

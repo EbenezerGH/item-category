@@ -1,0 +1,238 @@
+<html>
+
+<head>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+    </head>
+    <body>
+        <div class = 'pane'>
+        <h1>{{ category.name }}</h1>
+
+        {% with messages = get_flashed_messages() %}
+      {% if messages %}
+
+        <ul>
+        {% for message in messages %}
+            <li> <strong> {{ message }} </strong> </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+
+    {% if items !=[] %}
+
+        <a href = "{{url_for('newItem', category_id = category.id )}}">Create New Item</a>
+    </br></br>
+
+    <h2>Basketball</h2>
+
+        {% for i in items %}
+        {% if i.sport == 'Basketball' %}
+
+        <p>{{i.name}}</p>
+
+
+        <p>{{i.description}}</p>
+
+        <a href='{{url_for('editItem', category_id = category.id, menu_id=i.id ) }}' >Edit</a>
+    </br>
+    <a href='{{url_for('deleteItem', category_id = category.id, menu_id=i.id ) }}' >Delete</a>
+</br>
+</br>
+        {% endif %}
+
+        {% endfor %}
+
+
+
+        </br></br>
+
+    <h2>Futbol</h2>
+
+        {% for i in items %}
+        {% if i.sport == 'Futbol' %}
+
+        <p>{{i.name}}</p>
+
+
+        <p>{{i.description}}</p>
+
+        <a href='{{url_for('editItem', category_id = category.id, menu_id=i.id ) }}' >Edit</a>
+    </br>
+    <a href='{{url_for('deleteItem', category_id = category.id, menu_id=i.id ) }}' >Delete</a>
+</br>
+</br>
+        {% endif %}
+
+        {% endfor %}
+
+
+
+        </br></br>
+
+    <h2>Baseball</h2>
+
+        {% for i in items %}
+        {% if i.sport == 'Baseball' %}
+
+        <p>{{i.name}}</p>
+
+
+        <p>{{i.description}}</p>
+
+        <a href='{{url_for('editItem', category_id = category.id, menu_id=i.id ) }}' >Edit</a>
+
+    <a href='{{url_for('deleteItem', category_id = category.id, menu_id=i.id ) }}' >Delete</a>
+</br>
+</br>
+        {% endif %}
+
+        {% endfor %}
+
+
+
+        </br></br>
+
+    <h2>Frisbee</h2>
+
+        {% for i in items %}
+        {% if i.sport == 'Frisbee' %}
+
+        <p>{{i.name}}</p>
+
+
+        <p>{{i.description}}</p>
+
+
+
+        <a href='{{url_for('editItem', category_id = category.id, menu_id=i.id ) }}' >Edit</a>
+    </br>
+    <a href='{{url_for('deleteItem', category_id = category.id, menu_id=i.id ) }}' >Delete</a>
+</br>
+</br>
+{% endif %}
+
+        {% endfor %}
+
+                </br></br>
+
+    <h2>Snowboarding</h2>
+
+        {% for i in items %}
+        {% if i.sport == 'Snowboarding' %}
+
+        <p>{{i.name}}</p>
+
+
+        <p>{{i.description}}</p>
+
+
+
+        <a href='{{url_for('editItem', category_id = category.id, menu_id=i.id ) }}' >Edit</a>
+    </br>
+    <a href='{{url_for('deleteItem', category_id = category.id, menu_id=i.id ) }}' >Delete</a>
+</br>
+</br>
+{% endif %}
+
+        {% endfor %}
+
+        </br></br>
+
+    <h2>Rock Climbing</h2>
+
+        {% for i in items %}
+        {% if i.sport == 'Rock Climbing' %}
+
+        <p>{{i.name}}</p>
+
+
+        <p>{{i.description}}</p>
+
+
+
+        <a href='{{url_for('editItem', category_id = category.id, menu_id=i.id ) }}' >Edit</a>
+    </br>
+    <a href='{{url_for('deleteItem', category_id = category.id, menu_id=i.id ) }}' >Delete</a>
+</br>
+</br>
+{% endif %}
+
+        {% endfor %}
+
+                </br></br>
+
+    <h2>Foosball</h2>
+
+        {% for i in items %}
+        {% if i.sport == 'Foosball' %}
+
+        <p>{{i.name}}</p>
+
+
+        <p>{{i.description}}</p>
+
+
+
+        <a href='{{url_for('editItem', category_id = category.id, menu_id=i.id ) }}' >Edit</a>
+    </br>
+    <a href='{{url_for('deleteItem', category_id = category.id, menu_id=i.id ) }}' >Delete</a>
+</br>
+</br>
+{% endif %}
+
+        {% endfor %}
+
+        </br></br>
+
+    <h2>Skating</h2>
+
+        {% for i in items %}
+        {% if i.sport == 'Skating' %}
+
+        <p>{{i.name}}</p>
+
+
+        <p>{{i.description}}</p>
+
+
+
+        <a href='{{url_for('editItem', category_id = category.id, menu_id=i.id ) }}' >Edit</a>
+    </br>
+    <a href='{{url_for('deleteItem', category_id = category.id, menu_id=i.id ) }}' >Delete</a>
+</br>
+</br>
+{% endif %}
+
+        {% endfor %}
+
+        </br></br>
+
+    <h2>Hockey</h2>
+
+        {% for i in items %}
+        {% if i.sport == 'Hockey' %}
+
+        <p>{{i.name}}</p>
+
+
+        <p>{{i.description}}</p>
+
+
+
+        <a href='{{url_for('editItem', category_id = category.id, menu_id=i.id ) }}' >Edit</a>
+    </br>
+    <a href='{{url_for('deleteItem', category_id = category.id, menu_id=i.id ) }}' >Delete</a>
+</br>
+</br>
+{% endif %}
+
+        {% endfor %}
+
+        {% else %}
+        <p> You currently have no menu items. <p>
+        <a href = "{{url_for('newItem', category_id = category.id )}}">Create New Item</a>
+            {% endif %}
+</div>
+    </body>
+
+</html>
