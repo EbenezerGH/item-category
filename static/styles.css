@@ -1,14 +1,14 @@
-body            { font-family: sans-serif; background-image: url("background.jpg"); background-color: #ffffff}
- h1, h2, h3, h4       { color: #CC56CC; }
+body            { font-family: sans-serif; background-image: url("background.jpg"); background-color: #fefbf5}
+ h1, h2, h3, h4       { color: #efc050; }
 h1, h2          { font-family: 'Georgia', serif; margin: 0; }
-h1              { border-bottom: 2px solid #eee; }
+h1              { border-bottom: 2px solid #936b0e; }
 h2              { font-size: 1.2em; }
 
-p               { color: #CCCCCC;}
+p               { color: #b08010 ;}
 
 a {text-decoration: none; color:#FFFFCC; font-size: .75em;}
 
-.pane {position:absolute; left: 25%; border: 2px solid;
+.pane {position:static; left: 25%; border: 2px solid;
     border-radius: 25px; padding: 5px; margin: 5px; border-color: #999999; }
 .header         {left:50%; text-align: center;}
 .name {width:50%;display: inline-block; float: left;}
@@ -17,4 +17,23 @@ a {text-decoration: none; color:#FFFFCC; font-size: .75em;}
 .editdeletepane{}
 
 .flash          { background: #cee5F5; }
-.error          { background: #f0d6d6; padding: 0.5em; }
+.error          { background: #f2cd75; padding: 0.5em; }
+
+body:before, body:after {
+    content: "";
+    position: fixed;
+    background: #efc050;
+    left: 0;
+    right: 0;
+    height: 10px;
+}
+body:before {
+    top: 0;
+}
+body:after {
+    bottom: 0;
+}
+body {
+    border-left: 10px solid #efc050;
+    border-right: 10px solid #efc050;
+}

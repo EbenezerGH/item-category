@@ -30,7 +30,7 @@ class Items(Base):
     id = Column(Integer, primary_key=True)
     description = Column(String(250))
     sport = Column(String(250))
-    category_id = Column(Integer, ForeignKey('category.id'))
+    category_id = Column(Integer, ForeignKey('category.id', ondelete='CASCADE'))
     category = relationship(Category)
 
     @property

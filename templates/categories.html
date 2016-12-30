@@ -8,6 +8,7 @@
 <body>
 <div class = 'pane'>
 <h1>Categories</h1>
+<button type="button" onclick="window.location='http://localhost:8000/login'">Login</button>
 
 <a href="{{url_for('newCategory')}}" > <h3> Create a New Category </h3> </a>
 
@@ -20,8 +21,6 @@
 <p><a href = "{{url_for('editCategory',category_id = category.id)}}">Edit Category</a></p>
 
 <p> <a href = "{{url_for('deleteCategory',category_id = category.id)}}">Delete Category</a> </p>
-
-
 
 
 {% endfor %}

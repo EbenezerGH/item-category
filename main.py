@@ -12,7 +12,7 @@ from oauth2client.client import flow_from_clientsecrets
 from oauth2client.client import FlowExchangeError
 import httplib2
 import json
-from flask import make_response
+from flask import make_response, flash
 import requests
 
 CLIENT_ID = json.loads(open('client_secrets.json', 'r').read())['web']['client_id']
@@ -29,11 +29,9 @@ session = DBSession()
 # Create anti-forgery state token
 @app.route('/login')
 def showLogin():
-    print "entering login"
     state = ''.join(random.choice(string.ascii_uppercase + string.digits)
                     for x in xrange(32))
     login_session['state'] = state
-    # return "The current session state is %s" % login_session['state']
     return render_template('login.html', STATE=state)
 
 @app.route('/gconnect', methods=['POST'])
@@ -88,16 +86,16 @@ def gconnect():
         response.headers['Content-Type'] = 'application/json'
         return response
 
-    stored_credentials = login_session.get('credentials')
+    stored_access_token = login_session.get('access_token')
     stored_gplus_id = login_session.get('gplus_id')
-    if stored_credentials is not None and gplus_id == stored_gplus_id:
+    if stored_access_token is not None and gplus_id == stored_gplus_id:
         response = make_response(json.dumps('Current user is already connected.'),
                                  200)
         response.headers['Content-Type'] = 'application/json'
         return response
 
     # Store the access token in the session for later use.
-    login_session['credentials'] = credentials
+    login_session['access_token'] = credentials.access_token
     login_session['gplus_id'] = gplus_id
 
     # Get user info
@@ -118,11 +116,12 @@ def gconnect():
     output += '<img src="'
     output += login_session['picture']
     output += ' " style = "width: 300px; height: 300px;border-radius: 150px;-webkit-border-radius: 150px;-moz-border-radius: 150px;"> '
+
     flash("you are now logged in as %s" % login_session['username'])
     print "done!"
     return output
 
-# Disconnect
+
 @app.route('/gdisconnect')
 def gdisconnect():
     access_token = login_session['access_token']
@@ -139,6 +138,7 @@ def gdisconnect():
     result = h.request(url, 'GET')[0]
     print 'result is '
     print result
+
     if result['status'] == '200':
         del login_session['access_token']
         del login_session['gplus_id']
@@ -176,6 +176,8 @@ def showItem(category_id):
 # add new category
 @app.route('/category/add', methods=['GET', 'POST'])
 def newCategory():
+    if 'username' not in login_session:
+        return redirect('/login')
     if request.method == 'POST':
         addCategory = Category(name=request.form['name'])
         session.add(addCategory)
@@ -187,6 +189,8 @@ def newCategory():
 # edit category
 @app.route('/category/<int:category_id>/edit', methods=['GET', 'POST'])
 def editCategory(category_id):
+    if 'username' not in login_session:
+        return redirect('/login')
     editedCategory = session.query(Category).filter_by(id=category_id).one()
     if request.method == 'POST':
             if request.form['name']:
@@ -198,6 +202,9 @@ def editCategory(category_id):
 # delete category
 @app.route('/category/<int:category_id>/delete', methods=['GET', 'POST'])
 def deleteCategory(category_id):
+    if 'username' not in login_session:
+        return redirect('/login')
+    #deleteCategoryItems = session.query(Category)
     deletedCategory = session.query(Category).filter_by(id=category_id).one()
     if request.method == 'POST':
         session.delete(deletedCategory)
@@ -210,6 +217,8 @@ def deleteCategory(category_id):
 # add new item
 @app.route('/category/<int:category_id>/add', methods=['GET', 'POST'])
 def newItem(category_id):
+    if 'username' not in login_session:
+        return redirect('/login')
     if request.method == 'POST':
         addItem = Items(name=request.form['name'], description=request.form['description'], category_id=category_id)
         session.add(addItem)
@@ -223,6 +232,8 @@ def newItem(category_id):
 # edit menu
 @app.route('/category/<int:category_id>/<int:menu_id>/edit', methods=['GET', 'POST'])
 def editItem(category_id, menu_id):
+    if 'username' not in login_session:
+        return redirect('/login')
     editedItem = session.query(Items).filter_by(id=menu_id).one()
     if request.method == 'POST':
         if request.form['name']:
@@ -241,6 +252,8 @@ def editItem(category_id, menu_id):
 # delete menu
 @app.route('/category/<int:category_id>/<int:menu_id>/delete', methods=['GET', 'POST'])
 def deleteItem(category_id, menu_id):
+    if 'username' not in login_session:
+        return redirect('/login')
     itemToDelete = session.query(Items).filter_by(id=menu_id).one()
     if request.method == 'POST':
         session.delete(itemToDelete)
